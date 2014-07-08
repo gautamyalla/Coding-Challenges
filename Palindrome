@@ -1,0 +1,57 @@
+public class LinkedListNode
+	{
+		String data;
+		LinkedListNode next;
+	};
+	public class Result
+	{
+		 public LinkedListNode node;
+		 public boolean result;
+		 public Result()
+		 {
+			 
+		 }
+		 public Result( LinkedListNode node, boolean res)
+		 {
+			 this.result = res;
+			 this.node = node;
+		 }
+	};
+	
+	public Result IsPalindromeRecurse(LinkedListNode head, int length)
+	{
+		if(length == 0 || head ==null)
+			return new Result(null, true);
+		if(length == 1 )
+			return new Result(head.next, true);
+		if(length == 2)
+			return new Result(head.next.next, head.data==head.next.data);
+		Result res = IsPalindromeRecurse(head.next,length-2);
+		if(!res.result || res.node == null)
+			return res;
+		else
+		{
+			res.result=head.data==res.node.data;
+			res.node = res.node.next;
+			return res;
+		}
+		
+	}
+	
+	
+	boolean isPalindrome(LinkedListNode head)
+	{
+		Result p = IsPalindromeRecurse(head,listSize(head));
+		return p.result;
+	}
+	
+	int listSize(LinkedListNode head)
+	{
+		int count = 0;
+		while(head!=null)
+		{
+			count ++;
+			head = head.next;
+		}
+		return count;	
+	}
