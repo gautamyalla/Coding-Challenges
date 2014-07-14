@@ -1,0 +1,31 @@
+public class TreeNode
+	{
+		Integer data;
+		TreeNode left;
+		TreeNode right;
+	};
+	
+void printgreatersumTree(TreeNode root)
+	{
+	    int sum = 0; // Initialize sum
+	    reverseInorderTofindGreaterSumTree(root, sum);
+	}
+	void reverseInorderTofindGreaterSumTree(TreeNode root, int sum)
+	{
+	  
+	   if (root == null)  return;
+	 
+	   //right tree first
+	   reverseInorderTofindGreaterSumTree(root.right,sum);
+	 
+	   // Update sum
+	   
+	   // Store old sum in current node
+	   root.data = sum ;
+	   sum +=root.data;
+	   
+	   System.out.println(root.data);
+	 
+	   // left tree
+	   reverseInorderTofindGreaterSumTree(root.left, sum);
+	}
